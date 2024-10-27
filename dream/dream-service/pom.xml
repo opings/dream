@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>zyz.free</groupId>
+        <artifactId>dream</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>dream-service</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>zyz.free</groupId>
+            <artifactId>dream-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>zyz.free</groupId>
+            <artifactId>dream-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>zyz.free</groupId>
+            <artifactId>dream-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>zyz.free</groupId>
+            <artifactId>dream-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.16.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.0.0-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.wujiuye</groupId>
+            <artifactId>qps-helper</artifactId>
+            <version>1.1.2-RELEASE</version>
+        </dependency>
+    </dependencies>
+
+</project>

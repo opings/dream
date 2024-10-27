@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" strict="true" name="LogConfig">
+    <Properties>
+        <Property name="log_path">/data0/log-data/basketball-deepcomment-msv</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %C{16}.%M[%F:%L] - %msg%n"/>
+        </Console>
+
+        <RollingFile name="APP-LOG-APPENDER" fileName="${log_path}/app.log"
+                     filePattern="${log_path}/app.%d{yyyy-MM-dd}.log">
+            <Layout type="PatternLayout"
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %C{16}.%M[%F:%L] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!-- 此行以下为自动清理日志的配置 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="${log_path}">
+                    <!-- glob 项为需要自动清理日志的pattern -->
+                    <IfFileName glob="app.*.log"/>
+                    <!-- 1d 表示自动清理掉1天以前的日志文件 -->
+                    <IfLastModified age="24H"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="MSG-LOG-APPENDER" fileName="${log_path}/msg.log"
+                     filePattern="${log_path}/msg.%d{yyyy-MM-dd}.log">
+            <Layout type="PatternLayout"
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %C{16}.%M[%F:%L] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!-- 此行以下为自动清理日志的配置 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="${log_path}">
+                    <!-- glob 项为需要自动清理日志的pattern -->
+                    <IfFileName glob="msg.*.log"/>
+                    <!-- 1d 表示自动清理掉1天以前的日志文件 -->
+                    <IfLastModified age="24H"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+
+        <RollingFile name="COUNT-LOG-APPENDER" fileName="${log_path}/count.log"
+                     filePattern="${log_path}/count.%d{yyyy-MM-dd}.log">
+            <Layout type="PatternLayout"
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %C{16}.%M[%F:%L] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!-- 此行以下为自动清理日志的配置 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="${log_path}">
+                    <!-- glob 项为需要自动清理日志的pattern -->
+                    <IfFileName glob="count.*.log"/>
+                    <!-- 1d 表示自动清理掉1天以前的日志文件 -->
+                    <IfLastModified age="24H"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="STDOUT" level="info"/>
+            <AppenderRef ref="APP-LOG-APPENDER" level="info"/>
+        </Root>
+
+        <Logger name="com.hupu.deep.mqnotify" level="INFO" additivity="false">
+            <AppenderRef ref="MSG-LOG-APPENDER"/>
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+        <Logger name="com.hupu.deep.comment.client.mq" level="INFO" additivity="false">
+            <AppenderRef ref="MSG-LOG-APPENDER"/>
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+        <Logger name="com.hupu.deep.count" level="INFO" additivity="false">
+            <AppenderRef ref="COUNT-LOG-APPENDER"/>
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+
+    </Loggers>
+</Configuration>

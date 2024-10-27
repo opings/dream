@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /dream
+
+
+
+spring:
+  datasource:
+#    name: count
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/count?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: zyz123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redisson:
+    address: redis://127.0.0.1:6379
+    password: null
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: zyz.free.data
+
+
+logging:
+  level:
+    zyz.free.dream: debug
+
+

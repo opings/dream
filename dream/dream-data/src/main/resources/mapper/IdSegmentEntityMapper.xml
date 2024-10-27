@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zyz.free.data.mapper.IdSegmentEntityMapper">
+  <resultMap id="BaseResultMap" type="zyz.free.data.entity.IdSegmentEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="biz_tag" jdbcType="VARCHAR" property="bizTag" />
+    <result column="max_id" jdbcType="BIGINT" property="maxId" />
+    <result column="p_step" jdbcType="BIGINT" property="pStep" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="current_update_time" jdbcType="TIMESTAMP" property="currentUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, biz_tag, max_id, p_step, last_update_time, current_update_time
+  </sql>
+
+  <select id="selectByBizTag" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from id_segment
+    where biz_tag = #{bizTag,jdbcType=VARCHAR}
+  </select>
+
+
+  <update id="updateByBizTagAndMaxId" parameterType="zyz.free.data.entity.IdSegmentEntity">
+      update id_segment
+      set biz_tag             = #{bizTag,jdbcType=VARCHAR},
+          max_id              = #{maxId,jdbcType=BIGINT},
+          last_update_time    = #{lastUpdateTime,jdbcType=TIMESTAMP},
+          current_update_time = now()
+      where biz_tag = #{bizTag,jdbcType=VARCHAR}
+        and max_id = #{oldMaxId,jdbcType=BIGINT}
+  </update>
+<!--  <update id="updateByPrimaryKey" parameterType="zyz.free.data.entity.IdSegmentEntity">-->
+<!--    update id_segment-->
+<!--    set biz_tag = #{bizTag,jdbcType=VARCHAR},-->
+<!--      max_id = #{maxId,jdbcType=BIGINT},-->
+<!--      p_step = #{pStep,jdbcType=BIGINT},-->
+<!--      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},-->
+<!--      current_update_time = #{currentUpdateTime,jdbcType=TIMESTAMP}-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+<!--  <resultMap id="BaseResultMap" type="zyz.free.data.entity.IdSegmentEntity">-->
+<!--    <id column="id" jdbcType="BIGINT" property="id" />-->
+<!--    <result column="biz_tag" jdbcType="VARCHAR" property="bizTag" />-->
+<!--    <result column="max_id" jdbcType="BIGINT" property="maxId" />-->
+<!--    <result column="p_step" jdbcType="BIGINT" property="pStep" />-->
+<!--    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />-->
+<!--    <result column="current_update_time" jdbcType="TIMESTAMP" property="currentUpdateTime" />-->
+<!--  </resultMap>-->
+<!--  <sql id="Base_Column_List">-->
+<!--    id, biz_tag, max_id, p_step, last_update_time, current_update_time-->
+<!--  </sql>-->
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from id_segment-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </select>-->
+
+<!--  <update id="updateByPrimaryKeySelective" parameterType="zyz.free.data.entity.IdSegmentEntity">-->
+<!--    update id_segment-->
+<!--    <set>-->
+<!--      <if test="bizTag != null">-->
+<!--        biz_tag = #{bizTag,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="maxId != null">-->
+<!--        max_id = #{maxId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="pStep != null">-->
+<!--        p_step = #{pStep,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="lastUpdateTime != null">-->
+<!--        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="currentUpdateTime != null">-->
+<!--        current_update_time = #{currentUpdateTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+
+</mapper>
