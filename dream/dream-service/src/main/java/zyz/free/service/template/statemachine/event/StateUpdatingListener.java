@@ -25,7 +25,6 @@ public class StateUpdatingListener {
         StateDataHolder stateDataHolder = event.getStateDataHolder();
         if (initStateHandler.checkState(stateDataHolder.getOrderModel())) {
             initStateHandler.process(stateDataHolder);
-            log.info("init order:{}", stateDataHolder.getOrderModel());
         }
     }
 
@@ -36,7 +35,6 @@ public class StateUpdatingListener {
         StateDataHolder stateDataHolder = event.getStateDataHolder();
         if (processingStateHandler.checkState(stateDataHolder.getOrderModel())) {
             processingStateHandler.process(stateDataHolder);
-            log.info("processing order:{}", stateDataHolder.getOrderModel());
         }
     }
 
