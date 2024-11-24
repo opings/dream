@@ -33,7 +33,7 @@
         </javaTypeResolver>
 
         <!-- 数据表对应的model层  -->
-        <javaModelGenerator targetPackage="zyz.free.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="zyz.free.data.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -44,14 +44,14 @@
         </sqlMapGenerator>
 
         <!-- mybatis3中的mapper接口 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="zyz.free.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="zyz.free.data.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table schema="count" tableName="id_segment"
-               domainObjectName="IdSegmentEntity"
+        <table schema="count" tableName="expression_rule"
+               domainObjectName="ExpressionRuleEntity"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

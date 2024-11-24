@@ -11,6 +11,8 @@ import zyz.free.data.entity.IdSegmentEntity;
 import zyz.free.data.mapper.IdSegmentEntityMapper;
 import zyz.free.genid.response.SimpleResponse;
 import zyz.free.service.client.redis.RedisCacheClient;
+import zyz.free.service.template.engine.rule.RuleResult;
+import zyz.free.service.template.engine.rule.RuleService;
 import zyz.free.util.JacksonUtils;
 
 import java.util.ArrayList;
@@ -26,6 +28,17 @@ public class TestController {
     private final IdSegmentEntityMapper idSegmentEntityMapper;
 
     private final RedisCacheClient redisCacheClient;
+
+
+    private final RuleService ruleService;
+
+    @ApiOperation("Easy Rule test")
+    @GetMapping("/v1/easy-rule/test")
+    public SimpleResponse<RuleResult> easyRuleTest() {
+        RuleResult ruleResult = ruleService.matchRule();
+        return SimpleResponse.success(ruleResult);
+    }
+
 
     @ApiOperation("QPS test")
     @GetMapping("/v1/qps/test")

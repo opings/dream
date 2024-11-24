@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zyz.free.data.mapper.ExpressionRuleEntityMapper">
+  <resultMap id="BaseResultMap" type="zyz.free.data.entity.ExpressionRuleEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="rule_group" jdbcType="VARCHAR" property="ruleGroup" />
+    <result column="rule_code" jdbcType="VARCHAR" property="ruleCode" />
+    <result column="rule_name" jdbcType="VARCHAR" property="ruleName" />
+    <result column="rule_desc" jdbcType="VARCHAR" property="ruleDesc" />
+    <result column="priority" jdbcType="BIGINT" property="priority" />
+    <result column="when_expression" jdbcType="VARCHAR" property="whenExpression" />
+    <result column="then_expression" jdbcType="VARCHAR" property="thenExpression" />
+    <result column="db_create_time" jdbcType="TIMESTAMP" property="dbCreateTime" />
+    <result column="db_modify_time" jdbcType="TIMESTAMP" property="dbModifyTime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, rule_group, rule_code, rule_name, rule_desc,priority, when_expression, then_expression,
+    db_create_time, db_modify_time, deleted
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from expression_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="listByRuleGroup" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from expression_rule
+    where  rule_group = #{ruleGroup,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from expression_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="zyz.free.data.entity.ExpressionRuleEntity">
+      insert into expression_rule (rule_group, rule_code,
+                                   rule_name, rule_desc, priority,
+                                   when_expression, then_expression)
+      values (#{ruleGroup,jdbcType=VARCHAR}, #{ruleCode,jdbcType=VARCHAR},
+              #{ruleName,jdbcType=VARCHAR}, #{ruleDesc,jdbcType=VARCHAR}, #{priority,jdbcType=BIGINT},
+              #{whenExpression,jdbcType=VARCHAR}, #{thenExpression,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="zyz.free.data.entity.ExpressionRuleEntity">
+    update expression_rule
+    <set>
+      <if test="ruleGroup != null">
+        rule_group = #{ruleGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleCode != null">
+        rule_code = #{ruleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleName != null">
+        rule_name = #{ruleName,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleDesc != null">
+        rule_desc = #{ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=BIGINT},
+      </if>
+      <if test="whenExpression != null">
+        when_expression = #{whenExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="thenExpression != null">
+        then_expression = #{thenExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="dbCreateTime != null">
+        db_create_time = #{dbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbModifyTime != null">
+        db_modify_time = #{dbModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+</mapper>
